@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: { seller: "seller", manager: "manager", owner: "owner" }
+  ROLES = %w[seller manager owner].freeze
 
   has_many :stores, dependent: :destroy
   has_many :attendances, foreign_key: :seller_id, dependent: :destroy
@@ -10,5 +10,17 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
-  validates :role, presence: true, inclusion: { in: roles.keys }
+  validates :role, presence: true, inclusion: { in: ROLES }
+
+  def seller?
+    role == "seller"
+  end
+
+  def manager?
+    role == "manager"
+  end
+
+  def owner?
+    role == "owner"
+  end
 end

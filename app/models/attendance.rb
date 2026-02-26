@@ -2,10 +2,10 @@ class Attendance < ApplicationRecord
   belongs_to :store
   belongs_to :seller, class_name: "User"
 
-  enum result: { sale: "sale", no_sale: "no_sale", pending: "pending" }
+  RESULTS = %w[sale no_sale pending].freeze
 
   validates :store_id, :seller_id, :started_at, presence: true
-  validates :result, inclusion: { in: results.keys }, allow_nil: true
+  validates :result, inclusion: { in: RESULTS }, allow_nil: true
 
   scope :today, ->(store) { where(store_id: store, started_at: Time.current.beginning_of_day..Time.current.end_of_day) }
   scope :completed, -> { where.not(result: :pending) }

@@ -2,9 +2,10 @@ class SellerQueueStatus < ApplicationRecord
   belongs_to :store
   belongs_to :seller, class_name: "User"
 
-  enum status: { idle: "idle", attending: "attending", paused: "paused" }
+  STATUSES = %w[idle attending paused].freeze
 
   validates :store_id, :seller_id, :status, presence: true
+  validates :status, inclusion: { in: STATUSES }
 
-  scope :active, -> { where.not(status: :paused) }
+  scope :active, -> { where.not(status: "paused") }
 end

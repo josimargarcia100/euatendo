@@ -1,0 +1,3 @@
+<%= form_with(url: store_attendances_path(store), method: :post, local: true) do |form| %>
+  <%= form.submit "📱 Iniciar Atendimento", class: "w-full px-6 py-4 bg-indigo-600 text-white text-lg rounded-lg hover:bg-indigo-700 font-bold transition-colors", data: { confirm: "Deseja iniciar um atendimento?" } %>
+<% end %>

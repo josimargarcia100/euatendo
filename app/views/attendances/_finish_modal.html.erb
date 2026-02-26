@@ -1,0 +1,23 @@
+<div id="finish-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-lg shadow-xl p-8 max-w-md mx-4">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Qual foi o resultado?</h2>
+
+    <form action="#" method="post" class="space-y-4">
+      <div>
+        <%= button_tag type: "submit", class: "w-full px-6 py-4 bg-green-600 text-white text-lg rounded-lg hover:bg-green-700 font-bold" do %>
+          ✅ Vendeu
+        <% end %>
+      </div>
+
+      <div>
+        <%= button_tag type: "submit", class: "w-full px-6 py-4 bg-red-600 text-white text-lg rounded-lg hover:bg-red-700 font-bold" do %>
+          ❌ Não Vendeu
+        <% end %>
+      </div>
+
+      <div>
+        <%= button_tag "Cancelar", type: "button", class: "w-full px-6 py-4 bg-gray-200 text-gray-700 text-lg rounded-lg hover:bg-gray-300 font-bold" %>
+      </div>
+    </form>
+  </div>
+</div>

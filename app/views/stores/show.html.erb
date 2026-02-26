@@ -15,12 +15,34 @@
 
   <!-- Fila Digital Section -->
   <div class="bg-white rounded-lg shadow mb-8">
-    <div class="border-b p-6">
+    <div class="border-b p-6 flex items-center justify-between">
       <h2 class="text-2xl font-bold text-gray-900">📋 Fila Digital</h2>
+      <%= link_to "Ver Fila Completa →", queue_path, class: "px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium" %>
     </div>
     <div class="p-6">
-      <div id="queue" class="text-center text-gray-500 py-12">
-        <p>Carregando fila...</p>
+      <% attending = SellerQueueStatus.where(store: @store, status: "attending").includes(:seller).first %>
+      <% queue_count = SellerQueueStatus.where(store: @store, status: "idle").count %>
+
+      <% if attending %>
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
+          <p class="text-sm text-blue-600 font-medium">👤 Sendo Atendido Agora</p>
+          <p class="text-lg font-semibold text-gray-900"><%= attending.seller.name %></p>
+
+          <% current_attendance = @store.attendances.where(seller: attending.seller).where(ended_at: nil).first %>
+          <% if current_attendance && current_attendance.seller == current_user %>
+            <div class="mt-4 flex gap-3">
+              <%= button_to "✅ Vendeu", finish_attendance_path(current_attendance, result: "sale"), method: :patch, class: "flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium" %>
+              <%= button_to "❌ Não Vendeu", finish_attendance_path(current_attendance, result: "no_sale"), method: :patch, class: "flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="text-center">
+        <p class="text-gray-600">
+          <span class="text-3xl font-bold text-indigo-600"><%= queue_count %></span>
+          <span class="block text-sm mt-1">vendedores na fila</span>
+        </p>
       </div>
     </div>
   </div>

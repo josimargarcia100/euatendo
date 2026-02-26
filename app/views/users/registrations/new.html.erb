@@ -1,29 +1,45 @@
-<h2>Sign up</h2>
+<div class="py-8 max-w-md mx-auto">
+  <h1 class="text-3xl font-bold text-gray-900 mb-8">Criar Conta</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+  <div class="bg-white rounded-lg shadow p-8">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
-  </div>
+      <div class="mb-6">
+        <%= f.label :name, "Nome Completo", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.text_field :name, autofocus: true, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
 
-  <div class="field">
-    <p><%= f.label :password %></p>
-    <% if @minimum_password_length %>
-      <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
+      <div class="mb-6">
+        <%= f.label :email, "Email", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.email_field :email, autocomplete: "email", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= f.label :role, "Meu Perfil", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.select :role, [["Vendedor", "seller"], ["Gerente", "manager"], ["Proprietário", "owner"]], { prompt: "Selecione um perfil" }, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= f.label :password, "Senha", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <% if @minimum_password_length %>
+          <p class="text-xs text-gray-500 mb-2"><%= @minimum_password_length %> caracteres no mínimo</p>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-8">
+        <%= f.label :password_confirmation, "Confirmar Senha", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="flex gap-4">
+        <%= f.submit "Criar Conta", class: "flex-1 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium" %>
+      </div>
     <% end %>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
-  </div>
 
-  <div class="field">
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
+    <div class="mt-6 text-center">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

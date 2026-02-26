@@ -1,0 +1,4 @@
+# Background job schedule
+cleanup_stale_attendances:
+  class: CleanupStaleAttendancesJob
+  cron: '0 * * * *' # Run every hour at the top of the hour

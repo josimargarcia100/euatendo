@@ -44,7 +44,9 @@ class StoresController < ApplicationController
     @conversion_rate = Attendance.conversion_rate(@store)
     @total_attendances = @store.attendances.today(@store).count
     @sales = @store.attendances.today(@store).sales.count
-    @average_attendance_time = @store.attendances.today(@store).map(&:duration_minutes).compact.average || 0
+
+    durations = @store.attendances.today(@store).map(&:duration_minutes).compact
+    @average_attendance_time = durations.any? ? (durations.sum.to_f / durations.length).round(1) : 0
   end
 
   private

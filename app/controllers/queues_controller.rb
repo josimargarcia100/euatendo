@@ -26,7 +26,7 @@ class QueuesController < ApplicationController
     existing_status = SellerQueueStatus.find_by(store: @store, seller: current_user)
 
     if existing_status
-      redirect_to queue_path, notice: "Você já está na fila"
+      redirect_to store_queue_path(@store), notice: "Você já está na fila"
       return
     end
 
@@ -44,9 +44,9 @@ class QueuesController < ApplicationController
     if queue_status.save
       # Broadcast queue update to all connected clients
       broadcast_queue_update
-      redirect_to queue_path, notice: "Você foi adicionado à fila!"
+      redirect_to store_queue_path(@store), notice: "Você foi adicionado à fila!"
     else
-      redirect_to queue_path, alert: "Erro ao entrar na fila: #{queue_status.errors.full_messages.join(', ')}"
+      redirect_to store_queue_path(@store), alert: "Erro ao entrar na fila: #{queue_status.errors.full_messages.join(', ')}"
     end
   end
 
@@ -59,9 +59,9 @@ class QueuesController < ApplicationController
       queue_status.destroy
       # Broadcast queue update to all connected clients
       broadcast_queue_update
-      redirect_to queue_path, notice: "Você saiu da fila"
+      redirect_to store_queue_path(@store), notice: "Você saiu da fila"
     else
-      redirect_to queue_path, alert: "Você não pode sair da fila agora"
+      redirect_to store_queue_path(@store), alert: "Você não pode sair da fila agora"
     end
   end
 

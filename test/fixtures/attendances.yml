@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store: one
+  seller: one
+  result: MyString
+  started_at: 2026-02-26 16:17:31
+  ended_at: 2026-02-26 16:17:31
+
+two:
+  store: two
+  seller: two
+  result: MyString
+  started_at: 2026-02-26 16:17:31
+  ended_at: 2026-02-26 16:17:31

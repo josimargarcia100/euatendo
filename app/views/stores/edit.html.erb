@@ -1,0 +1,43 @@
+<div class="py-8 max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold text-gray-900 mb-8">Editar Loja</h1>
+
+  <div class="bg-white rounded-lg shadow p-8">
+    <%= form_with(model: @store, local: true) do |form| %>
+      <% if @store.errors.any? %>
+        <div class="mb-6 bg-red-50 border-l-4 border-red-400 p-4">
+          <h3 class="text-red-700 font-bold mb-2">Erros no formulário:</h3>
+          <ul class="list-disc list-inside text-red-600">
+            <% @store.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-6">
+        <%= form.label :name, "Nome da Loja", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= form.text_field :name, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :cnpj, "CNPJ (não pode ser alterado)", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= form.text_field :cnpj, disabled: true, class: "w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :phone, "Telefone", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= form.telephone_field :phone, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-8">
+        <%= form.label :timezone, "Fuso Horário", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= form.select :timezone, ActiveSupport::TimeZone.all.map { |z| [z.to_s, z.name] }, {}, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <div class="flex gap-4">
+        <%= form.submit "Salvar Alterações", class: "px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium" %>
+        <%= link_to "Cancelar", store_path(@store), class: "px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium" %>
+      </div>
+    <% end %>
+  </div>
+</div>

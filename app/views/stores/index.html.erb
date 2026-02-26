@@ -1,4 +1,45 @@
-<div>
-  <h1 class="font-bold text-4xl">Stores#index</h1>
-  <p>Find me in app/views/stores/index.html.erb</p>
+<div class="py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Minhas Lojas</h1>
+    <p class="text-gray-600">Gerencie suas lojas e filas de atendimento</p>
+  </div>
+
+  <% if @stores.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <% @stores.each do |store| %>
+        <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow">
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h2 class="text-xl font-bold text-gray-900"><%= store.name %></h2>
+                <p class="text-sm text-gray-500"><%= store.cnpj %></p>
+              </div>
+              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full">
+                <%= store.timezone %>
+              </span>
+            </div>
+
+            <p class="text-gray-600 text-sm mb-4">
+              📱 <%= store.phone %>
+            </p>
+
+            <div class="flex gap-2">
+              <%= link_to "Acessar", store_path(store), class: "flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-center font-medium text-sm" %>
+              <%= link_to "Editar", edit_store_path(store), class: "px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium text-sm" %>
+              <%= link_to "Deletar", store_path(store), method: :delete, data: { confirm: "Tem certeza?" }, class: "px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 font-medium text-sm" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-6 mb-8">
+      <p class="text-blue-700">Você ainda não tem nenhuma loja. Crie uma para começar a usar a fila digital!</p>
+    </div>
+  <% end %>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <h3 class="text-lg font-bold text-gray-900 mb-4">Criar Nova Loja</h3>
+    <%= link_to "➕ Adicionar Loja", new_store_path, class: "inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium" %>
+  </div>
 </div>

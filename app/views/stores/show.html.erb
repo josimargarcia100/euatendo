@@ -1,4 +1,39 @@
-<div>
-  <h1 class="font-bold text-4xl">Stores#show</h1>
-  <p>Find me in app/views/stores/show.html.erb</p>
+<div class="py-8">
+  <div class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900"><%= @store.name %></h1>
+      <p class="text-gray-600 mt-2">
+        <span class="inline-block bg-gray-100 px-3 py-1 rounded-full text-sm mr-2"><%= @store.cnpj %></span>
+        <span class="inline-block bg-gray-100 px-3 py-1 rounded-full text-sm mr-2"><%= @store.timezone %></span>
+        <span class="inline-block bg-gray-100 px-3 py-1 rounded-full text-sm">📱 <%= @store.phone %></span>
+      </p>
+    </div>
+    <div>
+      <%= link_to "Editar Loja", edit_store_path(@store), class: "px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium" %>
+    </div>
+  </div>
+
+  <!-- Fila Digital Section -->
+  <div class="bg-white rounded-lg shadow mb-8">
+    <div class="border-b p-6">
+      <h2 class="text-2xl font-bold text-gray-900">📋 Fila Digital</h2>
+    </div>
+    <div class="p-6">
+      <div id="queue" class="text-center text-gray-500 py-12">
+        <p>Carregando fila...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions Section -->
+  <div class="bg-white rounded-lg shadow">
+    <div class="border-b p-6">
+      <h2 class="text-2xl font-bold text-gray-900">⚙️ Ações</h2>
+    </div>
+    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <%= link_to "Visualizar Dashboard", dashboard_store_path(@store), class: "px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium text-center" %>
+      <%= link_to "Gerenciar Vendedores", "#", class: "px-4 py-3 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 font-medium text-center" %>
+      <%= link_to "Voltar para Lojas", stores_path, class: "px-4 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-medium text-center md:col-span-2" %>
+    </div>
+  </div>
 </div>

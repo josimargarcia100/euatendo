@@ -1,0 +1,69 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <!-- Navigation -->
+  <nav class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <div class="text-2xl font-bold text-indigo-600">Euatendo</div>
+      <div class="space-x-4">
+        <% if user_signed_in? %>
+          <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "px-4 py-2 text-gray-700 hover:text-gray-900" %>
+        <% else %>
+          <%= link_to "Entrar", new_user_session_path, class: "px-4 py-2 text-indigo-600 hover:text-indigo-700 font-medium" %>
+          <%= link_to "Criar Conta", new_user_registration_path, class: "px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700" %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+    <h1 class="text-5xl font-bold text-gray-900 mb-6">
+      Fila Digital para sua Loja
+    </h1>
+    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+      Gerencie atendimentos e visualize indicadores de conversão em tempo real. A solução acessível para pequenas lojas independentes.
+    </p>
+
+    <div class="space-x-4">
+      <% if user_signed_in? %>
+        <%= link_to "Ir ao Dashboard", stores_path, class: "px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 inline-block font-medium" %>
+      <% else %>
+        <%= link_to "Começar Agora", new_user_registration_path, class: "px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 inline-block font-medium" %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow p-8">
+        <div class="text-3xl mb-4">📱</div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Fila Digital</h3>
+        <p class="text-gray-600">Elimine o papel. Vendedores veem sua posição na fila e registram atendimentos em 1 toque.</p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-8">
+        <div class="text-3xl mb-4">📊</div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Indicadores em Tempo Real</h3>
+        <p class="text-gray-600">Acompanhe a taxa de conversão, atendimentos por hora e performance de cada vendedor.</p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-8">
+        <div class="text-3xl mb-4">💰</div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Acessível</h3>
+        <p class="text-gray-600">Assinatura mensal simples. Sem contratos. Comece a usar em menos de 15 minutos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="bg-indigo-600 text-white text-center py-16">
+    <h2 class="text-3xl font-bold mb-4">Pronto para transformar sua loja?</h2>
+    <% if user_signed_in? %>
+      <p class="mb-6">Você já está logado. Acesse suas lojas:</p>
+      <%= link_to "Minhas Lojas", stores_path, class: "px-6 py-3 bg-white text-indigo-600 rounded-lg hover:bg-gray-100 inline-block font-medium" %>
+    <% else %>
+      <p class="mb-6">Crie uma conta agora e comece a usar em 15 minutos.</p>
+      <%= link_to "Criar Conta Grátis", new_user_registration_path, class: "px-6 py-3 bg-white text-indigo-600 rounded-lg hover:bg-gray-100 inline-block font-medium" %>
+    <% end %>
+  </div>
+</div>

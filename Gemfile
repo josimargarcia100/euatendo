@@ -9,7 +9,7 @@ gem "pg", "~> 1.1", group: :production
 
 # Use sqlite3 for development only
 group :development do
-  gem "sqlite3", "~> 2.0"
+  gem "sqlite3", "~> 2.9"
 end
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
